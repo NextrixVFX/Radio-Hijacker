@@ -12,7 +12,7 @@ location /
                 client_max_body_size 512M;
 } 
 ```
-## After thats done attach an attenna to pin 4 [I used 4 breadboard jumper wires]
+## After thats done attach an antenna to pin 4 [I used 4 breadboard jumper wires]
 # Features:
 - WebUI
 - Temp Audio file uploading
