@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FM-Hijacker</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #333;
+        }
+        main {
+            display: flex;
+            justify-content: center;
+            gap:2vw;
+        }
+        .container {
+            display:flex;
+            gap:1vw;
+            
+        }
+        .controls {
+            margin-top: 2vh;
+            display: flex;
+            justify-content: center;
+
+        }
+        .upload {
+            margin-top:5vh;
+        }
+        
+        .inputs {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .fm-shit {
+            margin-top: 10vh;
+            background-color:#222;
+            padding: 14px;
+            border-radius: 25px;
+            color:white;
+            text-align: center;
+            font-family: monospace;
+            box-shadow: 0 4px 8px 0 rgba(255,255,255, 0.2), 0 6px 20px 0 rgba(255,255,255, 0.19);
+        }
+        
+        #uploadForm {
+            display:flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <div class="container">
+            <div class="fm-shit">
+                <div class="inputs">
+                    <div class="freq">
+                        <p>Frequency : 103.5</p>
+                        <input type="text" id="freq">
+                    </div>
+                    <div class="rate">
+                        <p>Sample Rate : 44100</p>
+                        <input type="text" id="rate">
+                    </div>
+                </div>
+                <br>
+                <p id="status">Status: {status}</p>
+                <div class="controls">
+                    <input type="file" id="fileInput">
+                    <button id="startButton">Start</button>
+                    <button id="stopButton">Stop</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById('startButton').addEventListener('click', () => {
+            const fileInput = document.getElementById('fileInput');
+            const freq = document.getElementById('freq').value;
+            const rate = document.getElementById('rate').value;
+            const file = fileInput.files[0];
+            if (file) {
+                const formData = new FormData();
+                formData.append('file', file);
+                formData.append('freq', freq);
+                formData.append('rate', rate);
+
+                fetch('/upload', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => {
+                    if (response.ok) {
+                        console.log('File uploaded successfully');
+                    } else {
+                        console.error('Error uploading file');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error uploading file:', error);
+                });
+            }
+        });
+
+        document.getElementById('stopButton').addEventListener('click', () => {
+            fetch('/stop', {
+                method: 'GET'
+            })
+            .then(response => {
+                if (response.ok) {
+                    console.log('Cleared and Stopped!');
+                } else {
+                    console.error('Error clearing and stopping');
+                }
+            })
+            .catch(error => {
+                console.error('Error clearing and stopping:', error);
+            });
+        });
+
+        function updateStatus() {
+            fetch('/status')
+            .then(response => response.text())
+            .then(status => {
+                document.getElementById('status').innerText = 'Status: ' + status;
+            })
+            .catch(error => {
+                console.error('Error updating status:', error);
+            });
+        }
+
+        updateStatus();
+
+        setInterval(updateStatus, 1000);
+    </script>
+</body>
+</html>
