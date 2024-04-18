@@ -1,12 +1,3 @@
-// To run:
-//  g++ -O3 -o pifm pifm.c
-//  ./pifm left_right.wav 103.3 22050 stereo
-//  ./pifm sound.wav
-
-// Created by Oliver Mattos and Oskar Weigl.
-// Code quality = Totally hacked together.
-
-
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
