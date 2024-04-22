@@ -11,11 +11,6 @@ class FMHijacker:
       self.freq: str = freq
       self.samplerate: str = samplerate
 
-   def test(self) -> None:
-      while True:
-         print(self.song, self.freq, self.samplerate)
-         sleep(1)
-
    def hijack(self) -> None:
       while True:
          print(self.song, self.freq, self.samplerate)
