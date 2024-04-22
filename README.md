@@ -1,5 +1,6 @@
 # How to install
-## Setup a NGINX Reverse Proxy for Node | https://jerryryle.github.io/rogueportal/
+## Setup a NGINX Reverse Proxy for Node: https://jerryryle.github.io/rogueportal/
+## Install Node v22 via: https://hassancorrigan.com/blog/install-nodejs-on-a-raspberry-pi-zero/
 ```
 location /  
 { 
@@ -17,7 +18,8 @@ location /
 - WebUI
 - Temp Audio file uploading
 - RoguePortal Support via Reverse Proxy
+- WAV Files only [Must be converted to Mono]
 
 # Known Issues:
 - Stop button not working [I'll fix soon]
-- Audio cuts out sometimes
+- Audio Cuts / Repeats sometimes
