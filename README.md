@@ -1,4 +1,4 @@
-# How to install
+# How to setup
 ## Setup a NGINX Reverse Proxy for Node: https://jerryryle.github.io/rogueportal/
 ## Install Node v22 via: https://hassancorrigan.com/blog/install-nodejs-on-a-raspberry-pi-zero/
 ```
